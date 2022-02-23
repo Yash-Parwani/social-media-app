@@ -6,9 +6,17 @@ const app = express();
 const port = 8000;
 
 const expressLayouts = require("express-ejs-layouts");
+
+
+// telling in which folder server should look for static files
+app.use(express.static("./assets"))
 //telling app to use layouts just before routes. why before routes? because routes will load views and views must know which partial to use
 
 app.use(expressLayouts);
+
+//extract styles and scripts from subpages into layouts
+app.set("layout extractStyles",true);
+app.set("layout extractScripts",true);
 
 //telling app to use routers which is in routes/index.js to handle all post and get requests from the browser
 app.use('/',require('./routes/index'));
