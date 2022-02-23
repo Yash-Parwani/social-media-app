@@ -1,3 +1,6 @@
 module.exports.home = function(request,response){
-    response.end("<h1>Express is set for Konnect!</h1>");
+    //rendering home.ejs and sending title from server to browser
+    return response.render("home",{
+         title: "Home"
+    });
 }
