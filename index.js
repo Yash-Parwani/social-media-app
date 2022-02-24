@@ -10,6 +10,17 @@ const expressLayouts = require("express-ejs-layouts");
 
 const db = require("./config/mongoose");
 
+//for reading and writing into cookiees we will use library cookie parser
+const cookieParser = require('cookie-parser');
+
+
+//reading through post requests i.e we need to encode url as well which is necessary to read post requests
+app.use(express.urlencoded());
+
+//setting up cookie parser through which server can read/write into cookie
+app.use(cookieParser());
+
+
 // telling in which folder server should look for static files
 app.use(express.static("./assets"))
 //telling app to use layouts just before routes. why before routes? because routes will load views and views must know which partial to use
