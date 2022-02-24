@@ -2,9 +2,29 @@
 const User = require('../models/user');
 
 module.exports.profile = function (request, response) {
-    return response.render("users", {
-        title: "User Profile Page"
-    });
+    //checking if user is authenticated or not 
+    //how? if user id is present in cookie it means user is authenticated 
+    //now here we will access cookie using request since we want to check if user is authenticated that will be present in cookie sent by the browser only
+
+    if(request.cookies.user_id){
+        //finding the user-id in the database
+        User.findById(request.cookies.user_id,function(error,user){
+            //if user is fount redirect to profile page else redirect user back to signin page
+            if(user){
+
+                return response.render("users", {
+                    title: "User Profile Page",
+                    user : user
+                });
+            }
+            else{
+                return response.redirect("/users/sign-in");
+            }
+        })
+    }
+    else{
+        return response.redirect("/users/sign-in")
+    }
 }
 module.exports.signIn = function (request, response) {
     return response.render("user_sign_in", {
