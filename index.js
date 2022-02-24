@@ -6,7 +6,9 @@ const app = express();
 const port = 8000;
 
 const expressLayouts = require("express-ejs-layouts");
+//importing our database
 
+const db = require("./config/mongoose");
 
 // telling in which folder server should look for static files
 app.use(express.static("./assets"))
