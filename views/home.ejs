@@ -1,3 +1,15 @@
 
     <h1>Konnect | <%=title%></h1>
-    
+    <section id="posts-section">
+        <h4> Posts </h4>
+        <% /* %>
+          creating form which corresponds to schema 
+        <% */ %>
+        <form action="" id="new-post" method="post">
+          <% /* %>
+      now we need an entire area to write post and not just a small input box hence have used text area
+<% */ %>
+          <textarea name="content"  cols="30" rows="3" placeholder="Type Here..."></textarea>
+          <input type="submit" value="Post">
+        </form>
+    </section>

@@ -5,18 +5,27 @@
     <%= title %>
 </title>
 <link rel="stylesheet" href="/css/layout.css">
-<!-- extracted style will be present in <%-style%> its similar to what <%- body%> does -->
+<% /* %>
+extracted style will be present in <%-style%> its similar to what <%- body%> does
+<% */ %>
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 
 <%- style %>
-<!-- style is written at bottom so that it overrides the layout css if required -->
+<% /* %>
+style is written at bottom so that it overrides the layout css if required 
+<% */ %>
 </head>
 
 <body>
-    <%- include("_header"); -%>
+    <% /* %>
+syntax for multiline comments in ejs
 
-<!-- <%-body %> is a predefined keyword in the ejs layouts library which incidcates the variable part of our website
+<% */ %>
+    
+    <%- include("_header"); -%>
+    <% /* %>
+ <%-body %> is a predefined keyword in the ejs layouts library which incidcates the variable part of our website
  the variable part will be sent by controller of a particular route 
 for eg when we hit localhost:8000/ the router will call corresponding controller which is homeControllerr which
 if we see tells to render home.ejs (which contains the variable part) so this home.ejs will be stored in <%-body%>
@@ -27,8 +36,8 @@ if we see tells to render users.ejs(which contains the variable paart) so this u
 
 SO this is how variable part is rendered and it helps us a lot
 
--->
-          
+
+<% */ %>
 <main id="layout-main">
     <%- body %>
 
