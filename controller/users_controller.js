@@ -7,11 +7,18 @@ module.exports.profile = function (request, response) {
     });
 }
 module.exports.signIn = function (request, response) {
+    if(request.isAuthenticated()){
+    
+        return response.redirect("/users/profile");
+    }
     return response.render("user_sign_in", {
         title: "Konnect Sign in"
     });
 }
 module.exports.signUp = function (request, response) {
+    if(request.isAuthenticated()){
+        return response.redirect("/users/profile");
+    }
     return response.render("user_sign_up", {
         title: "Konnect Sign up"
     });
@@ -50,6 +57,13 @@ module.exports.create = function (request, response) {
 
 }
 module.exports.createSession = function (request, response) {
-    //TODO create a session
+    //the user is signed in and we just want to redirect user to home page
+    console.log("User has successfully signed in")
+    return response.redirect("/");
+}
+
+module.exports.destroySession = function(request,response){
+    request.logout();
+    return response.redirect("/");
 }
 
