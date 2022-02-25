@@ -1,31 +1,35 @@
-<header>
-    Konnect header
-
-
-     <!-- if user is signed in than show user name and signout 
-    TO check if user is signed in , if he is than we had sent user to browser , so if locals.user exist means he is signed in
-     for difference between locals.user and user both are same but we are still using locals.user and its reason is mentioned in the book just after mongostore topic -->
-     <% if(locals.user) {%>
-        <ul>
-            <li><%= locals.user.name%></li>
-            <li>
-                <a href="/users/sign-out">Sign Out</a>
-            </li>
-        </ul>
-        
-        <%}else{%>
-            <!-- if user is not signed in than show him sign in and signup links -->
+<header id="layout-header">
+    <nav>
+        <div class="mini-logo">
+            <p>
+                <a href='/'>
+                     Konnect
+                </a>
+            </p>
+        </div>
+    
+        <div class="auth-links">
             <ul>
-                
+                <% if (locals.user){ %>
                 <li>
-                    <a href="/users/sign-up">Sign Up</a>
+                    <a href="/users/profile"><%= user.name %></a>
                 </li>
+                <li>
+                    <a href="/users/sign-out">Sign Out</a>
+                </li>
+                <% }else{ %>
                 <li>
                     <a href="/users/sign-in">Sign In</a>
                 </li>
+                <li>
+                    <a href="/users/sign-in">Sign Up</a>
+                </li>
+        
+                <% } %>
             </ul>
-            
+        </div>
+    </nav>
+ 
 
 
-     <%}%>   
 </header>

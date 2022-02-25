@@ -22,6 +22,16 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 const { disabled } = require('express/lib/application');
 const MongoStore = require('connect-mongo');
+const sassMiddleware = require("node-sass-middleware");
+
+
+app.use(sassMiddleware({
+    src: "./assets/scss",
+    dest: "./assets/css",
+    debug: true,
+    outputStyle: 'extended',
+    prefix: '/css'
+}))
 
 
 //reading through post requests i.e we need to encode url as well which is necessary to read post requests
