@@ -5,6 +5,7 @@
         <% /* %>
           creating form which corresponds to schema 
         <% */ %>
+        
         <form action="/posts/create" id="new-post" method="post">
           <% /* %>
       now we need an entire area to write post and not just a small input box hence have used text area
@@ -12,4 +13,26 @@
           <textarea name="content"  cols="30" rows="3" placeholder="Type Here..."></textarea>
           <input type="submit" value="Post">
         </form>
+       
+        <div id="posts-list-container">
+          <ul>
+            <% /* %>
+              now we will be looping through posts that we have sent from server to browser and display corresponding data 
+              we are looping because format for every post is same so its better to loop and save our time otherwise we will have to do for everposts
+      
+            <% */ %>
+            <% for(post of posts){%>
+                <p>
+                 <li><%= post.content%></li> 
+                 <li>
+                   <small>
+                     <%= post.user.name%>
+                   </small>
+                 </li>
+                </p>
+            
+            <%}%>
+          </ul>
+        </div>
+
     </section>
