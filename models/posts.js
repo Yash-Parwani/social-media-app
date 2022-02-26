@@ -7,7 +7,7 @@ const postSchema = mongoose.Schema({
     },
     //linking postschema to userschema so that we can link user who has commented
     user:{
-        type : mongoose.Schema.Types.ObjectId,
+        type : mongoose.SchemaTypes.ObjectId,
         //type : mongoose.SchemaTypes.ObjectId
         ref : 'user'
     }
