@@ -4,15 +4,18 @@
         <h4> Posts </h4>
         <% /* %>
           creating form which corresponds to schema 
+          only signed in user will be able to view form 
+          using locals.user and not user , reason mentioned in book
         <% */ %>
-        
-        <form action="/posts/create" id="new-post" method="post">
-          <% /* %>
-      now we need an entire area to write post and not just a small input box hence have used text area
-<% */ %>
-          <textarea name="content"  cols="30" rows="3" placeholder="Type Here..."></textarea>
-          <input type="submit" value="Post">
-        </form>
+        <% if(locals.user) {%>
+          <form action="/posts/create" id="new-post" method="post">
+            <% /* %>
+        now we need an entire area to write post and not just a small input box hence have used text area
+  <% */ %>
+            <textarea name="content"  cols="30" rows="3" placeholder="Type Here..."></textarea>
+            <input type="submit" value="Post">
+          </form>
+        <%}%>
        
         <div id="posts-list-container">
           <ul>
