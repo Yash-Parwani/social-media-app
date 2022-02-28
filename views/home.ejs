@@ -33,7 +33,28 @@
                    </small>
                  </li>
                 </p>
-            
+                <% /* %>
+                For every post we will have a comments form 
+                The comments form will be visible to only signed in users so that no one else comments
+              <% */ %>
+              <div class = "post-comments">
+                <% /* %>
+                   here we have class and not id for div because a single post can have multiple comments and we want all those comments to have same <style></style>
+              <% */ %>
+             <% if(locals.user) {%>
+              
+              <form action="/comments/create" method="post">
+                <input type="text" name="content" placeholder="Type here to add your comment...">
+                <% /* %>
+               Next we need to send the post id to identify which post we have to add the comment , so that is something we have to send 
+               so we can either allow user to send that or do it with hidden input we will be doing it with hidden input
+              <% */ %>
+              <input type="hidden" name="postId" value="<%=post._id%>">
+              <input type="submit" value="Add comment">
+              </form>
+              
+              <%}%>
+              </div>
             <%}%>
           </ul>
         </div>

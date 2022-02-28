@@ -16,6 +16,6 @@ router.use("/users",require("./users"));
 
 // handling all router requests for /posts
 router.use("/posts",require("./posts"));
-
-
+//handling all router requests for /comments
+router.use("/comments",require("./comments"));
 module.exports = router;
