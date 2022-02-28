@@ -39,7 +39,7 @@
               <% */ %>
               <div class = "post-comments">
                 <% /* %>
-                   here we have class and not id for div because a single post can have multiple comments and we want all those comments to have same <style></style>
+                   here we have class and not id for div because a single post can have multiple comments and we want all those comments to have same 
               <% */ %>
              <% if(locals.user) {%>
               
@@ -54,6 +54,27 @@
               </form>
               
               <%}%>
+              </div>
+              <% /* %>
+                  container for  all comments of a post
+                  user needs not to be logged in to view comments
+              <% */ %>
+              <div class ="post-comments-list"> 
+                <ul id="post-comments-<%=post._id%>">
+
+                 <% for(comment of post.comments) {%>
+                  <p>
+                    <%= comment.content%>
+                    <br>
+                    <small>
+                      <%= comment.user.name%>
+                    </small>
+                  </p>
+                  
+                  
+                  <%}%>
+
+                </ul>
               </div>
             <%}%>
           </ul>
