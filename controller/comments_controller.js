@@ -31,11 +31,11 @@ module.exports.create = function(request,response){
             post.comments.push(comment);
             post.save();
 
-            return response.render("/");
+            return response.redirect("/");
          })
         }//else if post not found simply return
         else{
-            return response.render("back");
+            return response.redirect("back");
         }
     });
 }

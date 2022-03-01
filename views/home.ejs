@@ -26,7 +26,23 @@
             <% */ %>
             <% for(post of posts){%>
                 <p>
-                 <li><%= post.content%></li> 
+                  <li><%= post.content%>
+                      <span>
+
+                        <% /* %>
+                        creating an anchor tag that helps to delete a post 
+                        the delete button should be visible to only signed in users and also to those users only who have created the post . 
+                        Agar sabko dikhaenge delete ka option toh kuch faeda nahi hai isliye unhi ko dikhao jinhone post ko create kiya hai aur woh logged in bhi ho
+      
+                        Again post.user.id will give object id of the user in string format since user field in post schema is pre populated as we had done in home controller with the exact document 
+                        post.user._id is object id and post.user.id is object id in string format and as discussed in destroy function of post controller string comparison is always the best
+                        And as discussed in destroy function of post action in post controller we will user locals.user.id and not locals.user._id
+                    <% */ %>
+                        <% if(locals.user && post.user.id == locals.user.id) {%>
+                          <a href="/posts/destroy/<%=post.id%>"> X </a>
+                          <%}%>
+                      </span>
+                  </li> 
                  <li>
                    <small>
                      <%= post.user.name%>
