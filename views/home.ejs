@@ -1,111 +1,39 @@
-
-    <h1>Konnect | <%=title%></h1>
-    <section id="posts-section">
-        <h4> Posts </h4>
-        <% /* %>
-          creating form which corresponds to schema 
-          only signed in user will be able to view form 
-          using locals.user and not user , reason mentioned in book
-        <% */ %>
-        <% if(locals.user) {%>
-          <form action="/posts/create" id="new-post" method="post">
-            <% /* %>
-        now we need an entire area to write post and not just a small input box hence have used text area
-  <% */ %>
-            <textarea name="content"  cols="30" rows="3" placeholder="Type Here..."></textarea>
-            <input type="submit" value="Post">
-          </form>
-        <%}%>
-       
-        <div id="posts-list-container">
-          <ul>
-            <% /* %>
-              now we will be looping through posts that we have sent from server to browser and display corresponding data 
-              we are looping because format for every post is same so its better to loop and save our time otherwise we will have to do for everposts
-      
+<h1>Konnect | <%=title%>
+</h1>
+<section id="posts-section">
+  <h4> Posts </h4>
+  <% /* %>
+    creating form which corresponds to schema
+    only signed in user will be able to view form
+    using locals.user and not user , reason mentioned in book
+    <% */ %>
+      <% if(locals.user) {%>
+        <form action="/posts/create" id="new-post" method="post">
+          <% /* %>
+            now we need an entire area to write post and not just a small input box hence have used text area
             <% */ %>
-            <% for(post of posts){%>
-                <p>
-                  <li><%= post.content%>
-                      <span>
+              <textarea name="content" cols="30" rows="3" placeholder="Type Here..."></textarea>
+              <input type="submit" value="Post">
+        </form>
+        <%}%>
 
-                        <% /* %>
-                        creating an anchor tag that helps to delete a post 
-                        the delete button should be visible to only signed in users and also to those users only who have created the post . 
-                        Agar sabko dikhaenge delete ka option toh kuch faeda nahi hai isliye unhi ko dikhao jinhone post ko create kiya hai aur woh logged in bhi ho
-      
-                        Again post.user.id will give object id of the user in string format since user field in post schema is pre populated as we had done in home controller with the exact document 
-                        post.user._id is object id and post.user.id is object id in string format and as discussed in destroy function of post controller string comparison is always the best
-                        And as discussed in destroy function of post action in post controller we will user locals.user.id and not locals.user._id
-                    <% */ %>
-                        <% if(locals.user && post.user.id == locals.user.id) {%>
-                          <a href="/posts/destroy/<%=post.id%>"> X </a>
-                          <%}%>
-                      </span>
-                  </li> 
-                 <li>
-                   <small>
-                     <%= post.user.name%>
-                   </small>
-                 </li>
-                </p>
-                <% /* %>
-                For every post we will have a comments form 
-                The comments form will be visible to only signed in users so that no one else comments
-              <% */ %>
-              <div class = "post-comments">
-                <% /* %>
-                   here we have class and not id for div because a single post can have multiple comments and we want all those comments to have same 
-              <% */ %>
-             <% if(locals.user) {%>
-              
-              <form action="/comments/create" method="post">
-                <input type="text" name="content" placeholder="Type here to add your comment...">
-                <% /* %>
-               Next we need to send the post id to identify which post we have to add the comment , so that is something we have to send 
-               so we can either allow user to send that or do it with hidden input we will be doing it with hidden input
-              <% */ %>
-              <input type="hidden" name="postId" value="<%=post._id%>">
-              <input type="submit" value="Add comment">
-              </form>
-              
-              <%}%>
-              </div>
+          <div id="posts-list-container">
+            <ul>
               <% /* %>
-                  container for  all comments of a post
-                  user needs not to be logged in to view comments
-              <% */ %>
-              <div class ="post-comments-list"> 
-                <ul id="post-comments-<%=post._id%>">
+                now we will be looping through posts that we have sent from server to browser and display corresponding
+                data
+                we are looping because format for every post is same so its better to loop and save our time otherwise
+                we will have to do for everposts
 
-                 <% for(comment of post.comments) {%>
-                  <p>
-                    <%= comment.content%>
-                    <span>
+                <% */ %>
+                  <% for(post of posts){%>
+                    
 
-                      <% /* %>
-                      
-                      creating an anchor tag to delete comments, explaination is almost the same given while creating an anchor tag to delete posts
-                        here comments is already populated hence comment.user.id will work and not comment.user.id since in homecontroller we had populated both comments as well as posts with their respective document
+                   <%-include('_posts')-%>
 
-                  <% */ %>
-                      <% if(locals.user && comment.user.id == locals.user.id) {%>
-                        <a href="/comments/destroy/<%=comment.id%>"> X </a>
-                        <%}%>
-                    </span>
-                    <br>
-                    <small>
-                      <%= comment.user.name%>
-                    </small>
-                  </p>
-                  
-                  
-                  <%}%>
 
-                </ul>
-              </div>
-            <%}%>
-          </ul>
-        </div>
+                            <%}%>
+            </ul>
+          </div>
 
-    </section>
+</section>
