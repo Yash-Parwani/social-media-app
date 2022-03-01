@@ -81,6 +81,18 @@
                  <% for(comment of post.comments) {%>
                   <p>
                     <%= comment.content%>
+                    <span>
+
+                      <% /* %>
+                      
+                      creating an anchor tag to delete comments, explaination is almost the same given while creating an anchor tag to delete posts
+                        here comments is already populated hence comment.user.id will work and not comment.user.id since in homecontroller we had populated both comments as well as posts with their respective document
+
+                  <% */ %>
+                      <% if(locals.user && comment.user.id == locals.user.id) {%>
+                        <a href="/comments/destroy/<%=comment.id%>"> X </a>
+                        <%}%>
+                    </span>
                     <br>
                     <small>
                       <%= comment.user.name%>
