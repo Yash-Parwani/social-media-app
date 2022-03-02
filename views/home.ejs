@@ -37,3 +37,34 @@
           </div>
 
 </section>
+
+<% /* %>
+   Now we will create a section that for now will be consisting of list of all users that are there on the website
+   In near future we will try to show the current users friends on this <section>
+
+
+    Now this section will consist of users and on clicking them we will be redirected to their profile page
+   </section>
+    <% */ %>
+
+<section id="users-friends">
+  <h3>Friends</h3>
+  <% /* %>
+   Running a loop to display all users
+    <% */ %>
+    <ul>
+    <% for(i of all_users){%>
+    
+    <li>
+      <p>
+        <% /* %>
+        we will be displaying users profile over here so that if we click on the name we will be redircted to that persons profile
+    <% */ %>
+        <a href="/users/profile/<%=i.id%>"><%=i.name%></a>
+      </p>
+    </li>
+    
+    
+      <%}%>
+    </ul>
+</section>

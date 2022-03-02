@@ -5,7 +5,7 @@ const router = express.Router();
 const usersController = require("../controller/users_controller");
 const passport = require("passport");
 //passport.checkauthentication checks if user is authenticated to access a particular route
-router.get('/profile',passport.checkAuthentication,usersController.profile);
+router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
 
 router.get("/sign-in",usersController.signIn);
 router.get("/sign-up",usersController.signUp);

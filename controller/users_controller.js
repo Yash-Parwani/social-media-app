@@ -2,9 +2,23 @@
 const User = require('../models/user');
 
 module.exports.profile = function (request, response) {
-    return response.render("users", {
-        title: "User Profile Page"
-    });
+    //this route will be triggered when person either clicks his own profile or clicks name of his/her friend
+    //So with when this route will be triggered we will get id for whom profile is requested so we will find that user and send
+    User.findById(request.params.id,function(error,user){
+        if(error){
+            console.log("Error in finding user");
+            console.log("Error message: ",error);
+            return;
+        }
+        //if user is found than send it to browser
+        return response.render("users", {
+            title: "User Profile Page",
+            /* here we will be sending page the user that we have found
+               Now here key cant be user because its already there in  locals (the one that passports sets for authentication jiske liye humne function bhi likha tha)
+             */
+            profile_user: user
+        });
+    })
 }
 module.exports.signIn = function (request, response) {
     if(request.isAuthenticated()){
