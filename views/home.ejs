@@ -1,70 +1,77 @@
-<h1>Konnect | <%=title%>
-</h1>
-<section id="posts-section">
-  <h4> Posts </h4>
+<link rel="stylesheet" href="/css/home.css">
+
+<div id="home-container">
+  
+  <h1>Konnect | <%=title%>
+  </h1>
+  <section id="posts-section">
+    <h4> Posts </h4>
+    <% /* %>
+      creating form which corresponds to schema
+      only signed in user will be able to view form
+      using locals.user and not user , reason mentioned in book
+      <% */ %>
+        <% if(locals.user) {%>
+          <form action="/posts/create" id="new-post" method="post">
+            <% /* %>
+              now we need an entire area to write post and not just a small input box hence have used text area
+              <% */ %>
+                <textarea name="content" cols="30" rows="3" placeholder="Type Here..."></textarea>
+                <input type="submit" value="Post">
+          </form>
+          <%}%>
+  
+            <div id="posts-list-container">
+              <ul>
+                <% /* %>
+                  now we will be looping through posts that we have sent from server to browser and display corresponding
+                  data
+                  we are looping because format for every post is same so its better to loop and save our time otherwise
+                  we will have to do for everposts
+  
+                  <% */ %>
+                    <% for(post of posts){%>
+                      
+  
+                     <%-include('_posts')-%>
+  
+  
+                              <%}%>
+              </ul>
+            </div>
+  
+  </section>
+  
   <% /* %>
-    creating form which corresponds to schema
-    only signed in user will be able to view form
-    using locals.user and not user , reason mentioned in book
-    <% */ %>
-      <% if(locals.user) {%>
-        <form action="/posts/create" id="new-post" method="post">
+     Now we will create a section that for now will be consisting of list of all users that are there on the website
+     In near future we will try to show the current users friends on this <section>
+  
+  
+      Now this section will consist of users and on clicking them we will be redirected to their profile page
+     </section>
+      <% */ %>
+  
+  <section id="users-friends">
+    <h3>Friends</h3>
+    <% /* %>
+     Running a loop to display all users
+      <% */ %>
+      <ul>
+      <% for(i of all_users){%>
+      
+      <li>
+        <p>
           <% /* %>
-            now we need an entire area to write post and not just a small input box hence have used text area
-            <% */ %>
-              <textarea name="content" cols="30" rows="3" placeholder="Type Here..."></textarea>
-              <input type="submit" value="Post">
-        </form>
+          we will be displaying users profile over here so that if we click on the name we will be redircted to that persons profile
+      <% */ %>
+          <a href="/users/profile/<%=i.id%>"><%=i.name%></a>
+        </p>
+      </li>
+      
+      
         <%}%>
-
-          <div id="posts-list-container">
-            <ul>
-              <% /* %>
-                now we will be looping through posts that we have sent from server to browser and display corresponding
-                data
-                we are looping because format for every post is same so its better to loop and save our time otherwise
-                we will have to do for everposts
-
-                <% */ %>
-                  <% for(post of posts){%>
-                    
-
-                   <%-include('_posts')-%>
+      </ul>
+  </section>
+</div>
 
 
-                            <%}%>
-            </ul>
-          </div>
-
-</section>
-
-<% /* %>
-   Now we will create a section that for now will be consisting of list of all users that are there on the website
-   In near future we will try to show the current users friends on this <section>
-
-
-    Now this section will consist of users and on clicking them we will be redirected to their profile page
-   </section>
-    <% */ %>
-
-<section id="users-friends">
-  <h3>Friends</h3>
-  <% /* %>
-   Running a loop to display all users
-    <% */ %>
-    <ul>
-    <% for(i of all_users){%>
-    
-    <li>
-      <p>
-        <% /* %>
-        we will be displaying users profile over here so that if we click on the name we will be redircted to that persons profile
-    <% */ %>
-        <a href="/users/profile/<%=i.id%>"><%=i.name%></a>
-      </p>
-    </li>
-    
-    
-      <%}%>
-    </ul>
-</section>

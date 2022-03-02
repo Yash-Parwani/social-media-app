@@ -2,5 +2,45 @@
     <h1>Konnect | Profile Page<%=title%></h1>
     <% /* %>
     showing users  profile and name     <% */ %>
-    <p><%=profile.user.name%></p>
-    <p><%=profile.user.email%></p>
+   
+
+    <% /* %>
+    showing a form to update users profile only if the person who is signed in is viewing his own profile
+    how do we check that ?
+    well we have profile_user document that contains id of the user whose profile we are showing 
+    so we need to match the id of the signed in user and the user for whom we wiill show the profile
+    
+    The profile page for anyone will be only available when that particular person has been logged in that we had checked already (we can see in the route as well ,theres an authentication check)so theres no need to do the locals part again
+    <% */ %>
+    <% /* %>
+    now the signed in user will be present in user key and .id for string comparison
+   <% */ %>
+    <% if(locals.user.id == profile.user.id){%>
+        
+        <% /* %>
+       If user matches than show the form
+       <% */ %>
+        <form action="/users/update/<%=profile_user.id%>" method="post">
+           
+        <% /* %>
+         user will be able to update all info except password(for now only will see how to do it later)
+         value of the input is the initial value only like in the box it will contain that value . 
+         if we clear box contents that it will show the placeholder
+         Say if user clears and sends than error will be thrown since fields are marked as required
+        <% */ %>
+        <input type="text" name="name" placeholder="Your name" value="<%=profile_user.name" required>
+        <input type="email" name="email" placeholder="Your email" value="<%=profile_user.email" required>
+        <input type="submit" value="Update Info">
+        </form>
+        
+    <%}else{%>
+        <% /* %>
+       if the user doesnt matches than only show the profile info
+   <% */ %>
+   <p><%=profile_user.name%></p>
+   <p><%=profile_user.email%></p>
+
+
+        <%}%>
+
+

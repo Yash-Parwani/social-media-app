@@ -20,6 +20,26 @@ module.exports.profile = function (request, response) {
         });
     })
 }
+// controller that handles profile updation
+
+module.exports.update = function(request,response){
+// checking so that no one fiddles with our system
+//so checking that only authorized users will be able to update profile
+//So checking if current logged in users is the same one whose profile is to be updated
+
+if(request.users.id == request.params.id){
+    User.findByIdAndUpdate(request.params.id,request.body,function(error,user){
+        return response.redirect("back");
+    })
+}
+else{
+    //if user is fiddling than we should show an error
+    // sending status as 401  which is for unautherization
+    return response.status(401).send("User not autherized")
+}
+
+
+}
 module.exports.signIn = function (request, response) {
     if(request.isAuthenticated()){
     
