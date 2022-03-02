@@ -16,7 +16,7 @@ module.exports.home = async function(request,response){
         })
     
        // finding all users that have signed in on our website so that we can show it on the webpage of our website
-      let users =  await User.find({},function(error,users));
+      let users =  await User.find({});
         return response.render("home",{
             title: "Konnect | Home",
             posts : posts,
