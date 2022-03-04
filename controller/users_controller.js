@@ -92,11 +92,13 @@ module.exports.create = function (request, response) {
 }
 module.exports.createSession = function (request, response) {
     //the user is signed in and we just want to redirect user to home page
+    request.flash('success','Logged in successfully');
     console.log("User has successfully signed in")
     return response.redirect("/");
 }
 
 module.exports.destroySession = function(request,response){
+    request.flash('success',"You have logged out")
     request.logout();
     return response.redirect("/");
 }

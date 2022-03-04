@@ -4,6 +4,12 @@
 <title>
     <%= title %>
 </title>
+<% /* %>
+Cdn for noty js both css and js files 
+<% */ %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"></script>
+
 <link rel="stylesheet" href="/css/layout.css">
 <% /* %>
 extracted style will be present in <%-style%> its similar to what <%- body%> does
@@ -38,14 +44,52 @@ SO this is how variable part is rendered and it helps us a lot
 
 
 <% */ %>
+<% /* %>
+accessing flash messages in our template 
+we will be accessing all the flash messages in our common layout
+layout is above everything else hence we will access themm over there only
+<% */ %>
+
+
+<% /* %>
+checking if flash is successfull and the length of success message is greater than 0 than only display message
+
+if flash is successfull but length is 0 so no flash message is to be shown
+
+<% */ %>
+
 <main id="layout-main">
     <%- body %>
 
 </main>
+<% /* %>
+for including flash messages while signing in a user , we need to figure it out by looking into the documentation
+for it we need to do some tweaks in passport local strategy
+<% */ %>
 
 
     <%- include("_footer"); -%>
 
     <%- script %>
+
+    <script>
+        <% if(flash.sucess &&flash.success.length>0){%>
+            new Noty({
+            theme: 'relax',
+            text: '<%= flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout : 1500
+}).show();
+<% if(flash.error &&flash.error.length>0){%>
+            new Noty({
+            theme: 'relax',
+            text: '<%= flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout : 1500
+}).show();
+    <%}%>
+        </script>
 </body>
 </html>    

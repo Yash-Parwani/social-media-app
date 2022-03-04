@@ -23,8 +23,9 @@ const passportLocal = require("./config/passport-local-strategy");
 const { disabled } = require('express/lib/application');
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require("node-sass-middleware");
-
-
+//requiring flash library to be used
+const flash = require('connect-flash');
+const customMiddleware = require("./config/middleware ")
 app.use(sassMiddleware({
     src: "./assets/scss",
     dest: "./assets/css",
@@ -86,9 +87,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+//just before routers (fixed syntax)and after session we will say to use flash
+//we need to put it after the session is being used since it usees session cookies
+app.use(flash());
 
+// telling after flash to use custom middleware which will send flash messages to response i.e browser from request
+// the order is very important
+app.use(customMiddleware.setFlash);
 //telling app to use routers which is in routes/index.js to handle all post and get requests from the browser
 //router should be at the end just before app.listen since all things that require to be initialized before routing things up should be present above the router call
+
+
+
 app.use('/',require('./routes/index'));
 
 //making our app listen 
