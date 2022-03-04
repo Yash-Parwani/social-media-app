@@ -2,9 +2,8 @@
 
 <div id="home-container">
   
-  <h1>Konnect | <%=title%>
-  </h1>
-  <section id="posts-section">
+ 
+  <section id="feed-posts">
     <h4> Posts </h4>
     <% /* %>
       creating form which corresponds to schema
@@ -30,13 +29,13 @@
                   we will have to do for everposts
   
                   <% */ %>
-                    <% for(post of posts){%>
+                    <% for(post of all_posts){%>
                       
   
-                     <%-include('_posts')-%>
+                     <%- include('_post') -%>
   
   
-                              <%}%>
+                     <%}%>
               </ul>
             </div>
   

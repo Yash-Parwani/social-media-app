@@ -9,10 +9,12 @@ module.exports.create = async function(request,response){
             // connecting i.e referencing which user created the post by sending the id of authenticated user only . since user is authenticated means request.user will be present since it will be set by setAuthenticated function of passport
             user: request.user._id
          });
+         request.flash('success',"Post Published !!");
              return response.redirect("back");
     }
     catch(error){
-        console.log("Error",error);
+        request.flash('error',error);
+        return response.redirect("back");
     }
 }
 
@@ -46,17 +48,20 @@ module.exports.destroy = async function(request,response){
             // now a post can have many comments to delete hence use delete many and post id which will delete all comments of a particular post id
            let comments = await Comment.deleteMany({post: request.params.id});
              //if no error than comments will be successfully deleted so return user to the same page from where he came
+             request.flash('success','Post and associated comments deleted')
              return response.redirect("back");
          
      }//if users dont match that is somebody else is trying to delete somebody elses post
      else{
+        request.flash('error','You can not delete this post');
             return response.redirect("back");
     
         }
    }
    catch(error){
+    request.flash('error',error);
        console.log("Error",error);
-       return;
+       return response.redirect("back");
    }
 
 }

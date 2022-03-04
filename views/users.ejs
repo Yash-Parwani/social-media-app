@@ -15,7 +15,7 @@
     <% /* %>
     now the signed in user will be present in user key and .id for string comparison
    <% */ %>
-    <% if(locals.user.id == profile.user.id){%>
+    <% if(locals.user.id == profile_user.id){%>
         
         <% /* %>
        If user matches than show the form
@@ -28,8 +28,8 @@
          if we clear box contents that it will show the placeholder
          Say if user clears and sends than error will be thrown since fields are marked as required
         <% */ %>
-        <input type="text" name="name" placeholder="Your name" value="<%=profile_user.name" required>
-        <input type="email" name="email" placeholder="Your email" value="<%=profile_user.email" required>
+        <input type="text" name="name" placeholder="Your name" value="<%=profile_user.name%>" required>
+        <input type="email" name="email" placeholder="Your email" value="<%=profile_user.email%>" required>
         <input type="submit" value="Update Info">
         </form>
         

@@ -17,17 +17,20 @@ passport.use(new LocalStrategy({
 
     // defining what is username field for us
     usernameField: 'email',
+    //passReqToCallback:  allows to set first argument as set
+    passReqToCallback:true
 },
-    function (email, password, done) {
+    function (request,email, password, done) {
         //find user through email and establish identity
         User.findOne({ email: email }, function (error, user) {
             if (error) {
-                console.log("Error in finding user --> Passport");
+                request.flash('error',error);
                 return done(error);
             }
             //if user is not found or password is notmatched
             if (!user || user.password != password) {
-                console.log("Invalid Username/Password");
+                //we never tell user whether his password is wron or username because if we do so , than if someone is trying to hack our account than he might be confirmed that username is correct and only password is wrong hence he will than use techniques to crack password and access our account
+                request.flash('error','Invalid UserName/password');
                 return done(null, false);
             }
             //if user is found

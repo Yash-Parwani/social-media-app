@@ -1,5 +1,5 @@
-const Post = require("../models/posts");
 
+const Posts = require("../models/posts")
 const User = require("../models/user")
 
 module.exports.home = async function(request,response){
@@ -7,19 +7,17 @@ module.exports.home = async function(request,response){
     //cookies come as in a request so to check we print it as request.cookies
     try{
 
-        let posts = Post.find({}).populate('user')
-        .populate({
-            path:"comments",
-            populate: ({
-                path:"user"
-            })
-        })
-    
+       let allPosts = await Posts.find({}).populate('user').populate({
+           path:'comments',
+           populate:{
+               path:'user'
+           }
+       });
        // finding all users that have signed in on our website so that we can show it on the webpage of our website
       let users =  await User.find({});
         return response.render("home",{
             title: "Konnect | Home",
-            posts : posts,
+            all_posts : allPosts,
             all_users: users
        });
     

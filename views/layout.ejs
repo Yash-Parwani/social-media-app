@@ -1,95 +1,123 @@
 <html>
 
 <head>
-<title>
-    <%= title %>
-</title>
-<% /* %>
-Cdn for noty js both css and js files 
-<% */ %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"></script>
+    <title>
+        <%= title %>
+    </title>
+    <% /* %>
+        Cdn for noty js both css and js files
+        <% */ %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+            <link rel="stylesheet" href="/css/layout.css">
+            <% /* %>
+                extracted style will be present in <%-style%> its similar to what <%- body%> does
+                        <% */ %>
+                            <link rel="stylesheet" href="/css/header.css">
+                            <link rel="stylesheet" href="/css/footer.css">
 
-<link rel="stylesheet" href="/css/layout.css">
-<% /* %>
-extracted style will be present in <%-style%> its similar to what <%- body%> does
-<% */ %>
-<link rel="stylesheet" href="/css/header.css">
-<link rel="stylesheet" href="/css/footer.css">
-
-<%- style %>
-<% /* %>
-style is written at bottom so that it overrides the layout css if required 
-<% */ %>
+                            <%- style %>
+                                <% /* %>
+                                    style is written at bottom so that it overrides the layout css if required
+                                    <% */ %>
 </head>
 
 <body>
     <% /* %>
-syntax for multiline comments in ejs
+        syntax for multiline comments in ejs
 
-<% */ %>
-    
-    <%- include("_header"); -%>
-    <% /* %>
- <%-body %> is a predefined keyword in the ejs layouts library which incidcates the variable part of our website
- the variable part will be sent by controller of a particular route 
-for eg when we hit localhost:8000/ the router will call corresponding controller which is homeControllerr which
-if we see tells to render home.ejs (which contains the variable part) so this home.ejs will be stored in <%-body%>
+        <% */ %>
+
+            <%- include("_header"); -%>
+
+            
 
 
-and if we hit localhost:8000/users/profile the route will call corresponding controller which is usersCOntroller which
-if we see tells to render users.ejs(which contains the variable paart) so this users.ejs will be store in <%-body%>
+                <% /* %>
+                    <%-body %> is a predefined keyword in the ejs layouts library which incidcates the variable part of
+                        our website
+                        for eg when we hit localhost:8000/ the router will call corresponding controller which is
+                        the variable part will be sent by controller of a particular route
+                        if we see tells to render home.ejs (which contains the variable part) so this home.ejs will be
+                        homeControllerr which
 
-SO this is how variable part is rendered and it helps us a lot
+                        stored in <%-body%>
+
+                            and if we hit localhost:8000/users/profile the route will call corresponding controller
+                            if we see tells to render users.ejs(which contains the variable paart) so this users.ejs
+                            which is usersCOntroller which
+
+                            will be store in <%-body%>
+
+                                SO this is how variable part is rendered and it helps us a lot
+
+                                    <% */ %>
+                                   
+                                              
+                                                    <main id="layout-main">
+                                                        <%- body %>
+
+                                                    </main>
+                                                    <% /* %>
+                                                        for including flash messages while signing in a user , we need
+                                                        to figure it out by looking into the documentation
+                                                        for it we need to do some tweaks in passport local strategy
+
+                                                        we need to include request in localStrategy to setup
+                                                        request.flash and than middleware will be able to extract flash
+                                                        messsage to be shown
 
 
-<% */ %>
-<% /* %>
-accessing flash messages in our template 
-we will be accessing all the flash messages in our common layout
-layout is above everything else hence we will access themm over there only
-<% */ %>
 
 
-<% /* %>
-checking if flash is successfull and the length of success message is greater than 0 than only display message
-
-if flash is successfull but length is 0 so no flash message is to be shown
-
-<% */ %>
-
-<main id="layout-main">
-    <%- body %>
-
-</main>
-<% /* %>
-for including flash messages while signing in a user , we need to figure it out by looking into the documentation
-for it we need to do some tweaks in passport local strategy
-<% */ %>
+                                                        <% */ %>
 
 
-    <%- include("_footer"); -%>
+                                                            <%- include("_footer"); -%>
 
-    <%- script %>
+                                                                <%- script %>
 
-    <script>
-        <% if(flash.sucess &&flash.success.length>0){%>
-            new Noty({
-            theme: 'relax',
-            text: '<%= flash.success%>',
-            type: 'success',
-            layout: 'topRight',
-            timeout : 1500
-}).show();
-<% if(flash.error &&flash.error.length>0){%>
-            new Noty({
-            theme: 'relax',
-            text: '<%= flash.error%>',
-            type: 'error',
-            layout: 'topRight',
-            timeout : 1500
-}).show();
+<script>
+
+
+     /*
+                                        we will be accessing all the flash messages in our common layout
+                                        accessing flash messages in our template
+                                        
+                                        layout is above everything else hence we will access themm over there only
+
+
+                                        checking if flash is successfull and the length of success message is
+                                        
+                                                greater than 0 than only display message
+                                                shown
+                                                if flash is successfull but length is 0 so no flash message is to be
+
+       */
+
+    <% if(flash.success && flash.success.length >0){%>
+        new Noty({
+     theme:'relax',
+     text: '<%=flash.success%>',
+     type: 'success',
+     layout: 'topRight',
+     timeout:1500
+ }).show();
+                          
     <%}%>
-        </script>
+
+    <% if (flash.error && flash.error.length > 0) {%>
+                new Noty({
+                    theme: 'relax',
+                    text: "<%= flash.error %>",
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                    
+                }).show();    
+            <%} %>
+</script>                                                           
+
 </body>
-</html>    
+
+</html>

@@ -25,7 +25,11 @@ const MongoStore = require('connect-mongo');
 const sassMiddleware = require("node-sass-middleware");
 //requiring flash library to be used
 const flash = require('connect-flash');
-const customMiddleware = require("./config/middleware ")
+const customMware = require("./config/middleware")
+
+
+const Noty = require('noty');
+
 app.use(sassMiddleware({
     src: "./assets/scss",
     dest: "./assets/css",
@@ -93,7 +97,7 @@ app.use(flash());
 
 // telling after flash to use custom middleware which will send flash messages to response i.e browser from request
 // the order is very important
-app.use(customMiddleware.setFlash);
+app.use(customMware.setFlash);
 //telling app to use routers which is in routes/index.js to handle all post and get requests from the browser
 //router should be at the end just before app.listen since all things that require to be initialized before routing things up should be present above the router call
 
