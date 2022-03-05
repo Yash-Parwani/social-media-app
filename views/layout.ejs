@@ -9,6 +9,15 @@
         <% */ %>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+        <% /* %>
+            cdn for jquery to be included just after noty js scripts since noty says that they have  depreciated use of jquery
+
+
+            and we are declaring jquery in layout since we want all other pages should be able to use it as well
+        <% */ %>
+
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link rel="stylesheet" href="/css/layout.css">
             <% /* %>
                 extracted style will be present in <%-style%> its similar to what <%- body%> does

@@ -9,6 +9,31 @@ module.exports.create = async function(request,response){
             // connecting i.e referencing which user created the post by sending the id of authenticated user only . since user is authenticated means request.user will be present since it will be set by setAuthenticated function of passport
             user: request.user._id
          });
+
+         /*ONce the middleware home_posts submits the data ,we will recieve it in post controller
+           so we need to view that data over here in posts controller
+
+           the middleware will send the form data and we will want to view it
+
+           now we just need to check whether the given request is an ajax request or not 
+
+           type of ajax request is xhr
+          */
+
+           //detecting if request is of ajax type
+           if(request.xhr){
+               //if request is of ajax type i.e asynchronous than we need to return some json
+
+               //we return json with some status and message
+               return response.status(200).json({
+                   //shaping json in a specific way
+                   //json has key data which will contain post which will contain the post we had created
+                   data: {
+                       post: post
+                   },
+                   message:"Post created !!"
+                });
+           }
          request.flash('success',"Post Published !!");
              return response.redirect("back");
     }

@@ -1,4 +1,7 @@
-<li>
+<% /* %>
+Giving id to li so that it will help us to delete post later
+<% */ %>
+<li id="post-<%=post.id%>">
                       <p>
                         <%= post.content%>
                           <span>
@@ -17,8 +20,12 @@
                               And as discussed in destroy function of post action in post controller we will user
                               locals.user.id and not locals.user._id
                               <% */ %>
+
+                              <% /* %>
+                             giving class to delte button to have common styling for all delete buttons
+                              <% */ %>
                                 <% if(locals.user && post.user.id==locals.user.id) {%>
-                                  <a href="/posts/destroy/<%=post.id%>"> X </a>
+                                  <a class="delete-post-button" href="/posts/destroy/<%=post.id%>"> X </a>
                                   <%}%>
                           </span>
                         

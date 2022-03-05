@@ -28,7 +28,7 @@ const flash = require('connect-flash');
 const customMware = require("./config/middleware")
 
 
-const Noty = require('noty');
+
 
 app.use(sassMiddleware({
     src: "./assets/scss",

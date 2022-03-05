@@ -11,7 +11,7 @@
       using locals.user and not user , reason mentioned in book
       <% */ %>
         <% if(locals.user) {%>
-          <form action="/posts/create" id="new-post" method="post">
+          <form action="/posts/create" id="new-post-form" method="post">
             <% /* %>
               now we need an entire area to write post and not just a small input box hence have used text area
               <% */ %>
@@ -73,4 +73,10 @@
   </section>
 </div>
 
+<% /* %>
+including script that will allow us to submit form data asynchoronously viz homeposts.js
+ <% */ %>
 
+
+<script src="/js/home_posts.js">
+</script>
