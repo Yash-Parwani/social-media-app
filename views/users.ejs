@@ -20,7 +20,7 @@
         <% /* %>
        If user matches than show the form
        <% */ %>
-        <form action="/users/update/<%=profile_user.id%>" method="post">
+        <form action="/users/update/<%=profile_user.id%>" method="post" enctype="multipart/form-data">
            
         <% /* %>
          user will be able to update all info except password(for now only will see how to do it later)
@@ -30,6 +30,11 @@
         <% */ %>
         <input type="text" name="name" placeholder="Your name" value="<%=profile_user.name%>" required>
         <input type="email" name="email" placeholder="Your email" value="<%=profile_user.email%>" required>
+        <% /* %>
+        creatin an input of type file to accept files from user
+        also in form tag dont forget to add attribute enctype and its values as multipart/form-data
+       <% */ %>
+       <input type="file" name="avatar" placeholder="Profile Picture">
         <input type="submit" value="Update Info">
         </form>
         
