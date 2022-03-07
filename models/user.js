@@ -19,23 +19,49 @@ const AVATAR_PATH = path.join('/uploads/users/avatars');
 
 
 const userSchema = new mongoose.Schema({
-    email : {
-        type : String,
-        required : true,
-        unique : true
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
-    password :{
-        type : String,
-        required : true
-    },
-    name : {
+    password: {
         type: String,
         required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    avatar: {
+        type: String
+        //we dont want it for now to be required hence leaving it
     }
-},{
-    timestamps : true
+}, {
+    timestamps: true
 });
 
 
-const User = mongoose.model("User",userSchema);
+
+//defining settings for saving files in AVATAR_PATH 
+//copy the entire settings from multer documentation(if we google multer documentation) except line var upload = {}
+
+
+const storage = Multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, ".." ,AVATAR_PATH))
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+});
+
+// static functions
+// the uploadedAvatar static function helps us to use request.params/request.body else we would not be able to use them 
+userSchema.statics.uploadedAvatar = Multer({ storage: storage }).single('avatar'); 
+//creating a static variable to access path name from outside the file as well
+//i.e we make AVATAR_PATH publicly available
+
+userSchema.statics.avatarPath = AVATAR_PATH;
+const User = mongoose.model("User", userSchema);
 module.exports = User
