@@ -72,6 +72,18 @@ module.exports.destroy = async function(request,response){
             //next deleting associated comments of the post
             // now a post can have many comments to delete hence use delete many and post id which will delete all comments of a particular post id
            let comments = await Comment.deleteMany({post: request.params.id});
+
+
+           //sending post id to be delted dynamically using ajax hence we need to send the post id to be deleted
+             if(request.xhr){
+                 //if the request is ajax , we try to shape json in a similar manner we did it in above  action viz create
+                 return response.status(200).json({
+                     data:{
+                         post_id : request.params.id
+                     },
+                     message:"Post deleted"
+                 })
+             }
              //if no error than comments will be successfully deleted so return user to the same page from where he came
              request.flash('success','Post and associated comments deleted')
              return response.redirect("back");

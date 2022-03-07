@@ -13,6 +13,9 @@ module.exports.home = async function(request,response){
                path:'user'
            }
        });
+       //sorting all posts to make prepending look natural on our website
+
+       allPosts.sort('-createdAt');
        // finding all users that have signed in on our website so that we can show it on the webpage of our website
       let users =  await User.find({});
         return response.render("home",{

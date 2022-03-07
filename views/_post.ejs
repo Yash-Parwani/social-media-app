@@ -67,7 +67,9 @@ Giving id to li so that it will help us to delete post later
                             <div class="post-comments-list">
                               <ul id="post-comments-<%=post._id%>">
 
+
                                 <% for(comment of post.comments) {%>
+                                  <% /* %> removing for loop for iterating thorugh commments since now it will be appended to when we add a comment so no need to iterate<% */%>
                                  <%-include('_comments')-%>
 
 
