@@ -27,7 +27,8 @@ const sassMiddleware = require("node-sass-middleware");
 const flash = require('connect-flash');
 const customMware = require("./config/middleware")
 
-
+//importing passport-jwt strategy in the main index.js so that we dont run into errors, this is the first step to do
+const passportJWT = require('./config/passport-jwt-strategy');
 
 
 app.use(sassMiddleware({
