@@ -47,7 +47,16 @@ app.use(cookieParser());
 
 
 // telling in which folder server should look for static files
-app.use(express.static("./assets"))
+app.use(express.static("./assets"));
+/*
+making uploads path to be available publicly
+so app to use for path /uploads , find the folder using express.static, we just join the path to uploads folder
+so director of index joined to uploads i.e social media app / uploads is avialable on path /uploads
+*/
+
+//make the uploads path available to the browser
+app.use('/uploads',express.static(__dirname+ '/uploads'))
+
 //telling app to use layouts just before routes. why before routes? because routes will load views and views must know which partial to use
 
 app.use(expressLayouts);

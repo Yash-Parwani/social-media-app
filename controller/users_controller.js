@@ -1,6 +1,7 @@
 //importing user model in order to access users in the database stored
 const User = require('../models/user');
-
+const fs = require('fs');
+const path = require('path');
 module.exports.profile = function (request, response) {
     //this route will be triggered when person either clicks his own profile or clicks name of his/her friend
     //So with when this route will be triggered we will get id for whom profile is requested so we will find that user and send
@@ -100,6 +101,26 @@ if(request.user.id == request.params.id)
          // i.e check if request has file object or not
            if(request.file){
                //updating file only when user sends file
+
+
+               // checking if the user already has an avatar associated with him/her .
+               //if he has already an avatar than we delete that 
+               if(user.avatar){
+                   //means user already has an avatar, so we need to delete that before we update it with new one
+                   // for deleting we need the module fs(filesystem) and also a 'path' module since we will be deleting from a path as well(user.avatar) 
+                   //so import thoses and use
+
+                   //1st remove file from folder
+                   fs.unlinkSync(path.join(__dirname,"..",user.avatar));
+                   /*
+                   unlinkSync function of fs is used to delete from a path
+
+                   now we pass path to unlinkSync
+                   But we dont pass straight away the path in a string format, because its safer to do using __dirname , i.e relative linking
+
+                   __dirname will give path of users_controlle that is the current path of users_controller where we are writing the code
+                   */
+               }
                user.avatar = User.avatarPath+ '/' + request.file.filename;
                //the above line of code is saving the pathof the uploaded file into the avatar field in the user
 

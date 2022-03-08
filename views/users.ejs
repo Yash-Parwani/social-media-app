@@ -1,5 +1,21 @@
 <link rel="stylesheet" href="/css/user_profile.css">
-    <h1>Konnect | Profile Page<%=title%></h1>
+<% /* %>
+Displaying users avatar
+
+we will show users avatar using image tag
+
+now where will be current users avatar path saved in?
+
+in 'avatar' field of our current user .... right
+
+So source of the image that will be the avatar fieldname
+i.e user.avatar 
+so in ejs , wwe use<%= %> to write value of field right
+ <% */ %>
+
+ <img src="<%= user.avatar %>" alt="<%= user.name %>'s profile" width="100"> 
+
+
     <% /* %>
     showing users  profile and name     <% */ %>
    
