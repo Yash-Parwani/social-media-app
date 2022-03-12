@@ -31,7 +31,7 @@ let createPost = function(){
 
     $.ajax({
         type:'post',
-        //url to which form needs to be submitted
+        //url to which form needs to be submitted i.e form main jo action attribute hai uski value i.e new-post-form ka action value ki attribute
         url:'/posts/create',
         //we need to send in the data that we want to create a post for
         data:newPostForm.serialize(),// serialize converts form data to Json format like content would be key and value will be value filled in form
@@ -40,8 +40,8 @@ let createPost = function(){
             //data will be the json data that we had converted above
             
             console.log(data);
-            // newPostDom creates a post so we need to call that function over here when its successfull
-            // now if we see in console we had print data which was forms data so if we see that in data we have another field key as data and in it we have a key post which contains the data that we have sent via the form , so we 
+            // newPostDom creates a post in DOM so we need to call that function over here when its successfull
+            // now if we see in console we had print data which was forms data so if we see that in data we have another field key as data and in it we have a key post which contains the data that we have sent via the form , so we need to send data.data.post to newPost function to display a post in dom
             //so we create it via newPostDom function
 
             let newPost = newPostDom(data.data.post);
@@ -62,7 +62,7 @@ let createPost = function(){
 });
 }
 
-//calling createPost function nahi toh function ka koi use nahi hoga agar hum usse call hi nahi kar pae 
+//calling createPost function nahi toh function ka koi use nahi hoga agar hum usse call hi nahi kar paenge
 createPost();
 
 
@@ -85,11 +85,11 @@ also we will be removing for loop where we display the comment since it will be 
 
 let newPostDom = function(post){
     //passing post data that we have recieved from database
-    /*copy paasting code that we had written in _posts.ejs in return inside backticks
-    we cant return comments hence have to delete it but have mentiioned all of it in _post.ejs
+    /*copy pasting code that we had written in _posts.ejs in return inside backticks
+    we cant return comments hence have to delete it but have mentiioned all of the comments  in _post.ejs
     
     we have removed all checks and for loops from that _posts.ejs as explained in above comments
-      removing for loop for iterating thorugh commments since now it will be appended to when we add a comment so no need to iterate
+      removing for loop for iterating through comment's since now it will be appended to when we add a comment so no need to iterate
     */
     return $(`
     <li id="post-${post.id}">

@@ -1,5 +1,5 @@
 <% /* %>
-Giving id to li so that it will help us to delete post later
+Giving id to li so that it will help us to delete post later using ajax
 <% */ %>
 <li id="post-<%=post.id%>">
                       <p>
@@ -46,7 +46,7 @@ Giving id to li so that it will help us to delete post later
                             <% */ %>
                               <% if(locals.user) {%>
 
-                                <form action="/comments/create" method="post">
+                                <form action="/comments/create" method="post" id="new-comment-form">
                                   <input type="text" name="content" placeholder="Type here to add your comment...">
                                   <% /* %>
                                     Next we need to send the post id to identify which post we have to add the comment ,

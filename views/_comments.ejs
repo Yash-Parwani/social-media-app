@@ -1,4 +1,7 @@
-<li>
+<% /* %>
+Giving id to li so that it will help us to delete post later using ajax
+<% */ %>
+<li id="comment-<%= comment._id%>">
 
     <p>
       <%= comment.content%>
@@ -13,8 +16,12 @@
             as posts with their respective document
 
             <% */ %>
+
+            <% /* %>
+                             giving class to delte button to have common styling for all delete buttons of comments
+                              <% */ %>
               <% if(locals.user && comment.user.id==locals.user.id) {%>
-                <a href="/comments/destroy/<%=comment.id%>"> X </a>
+                <a href="/comments/destroy/<%=comment.id%>" class ="delete-comment-button"> X </a>
                 <%}%>
         </span>
         <br>

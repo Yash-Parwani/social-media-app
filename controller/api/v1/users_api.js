@@ -32,7 +32,7 @@ const jwt = require("jsonwebtoken");
       return response.json("200",{
           message:"Sign in successful,here is your jwt token, pleasse keep it safe ",
           data:{
-              token : jwt.sign(user.toJSON(),'konnect',{expires :'10000'}) 
+              token : jwt.sign(user.toJSON(),'konnect',{expires :'100000'}) 
           }
       })
   }
