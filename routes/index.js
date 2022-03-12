@@ -21,4 +21,7 @@ router.use("/comments",require("./comments"));
 
 //connecting routes of (i.e the index of routes of api) to the main router, so that it will know what to do when requests for api comes in
 router.use("/api",require("./api/index"));
+
+// connecting routes of likes so that all request for likes will be handled by the corresponding rotuer
+router.use('/likes',require('./likes'));
 module.exports = router;
