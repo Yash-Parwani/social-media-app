@@ -30,10 +30,10 @@ const customMware = require("./config/middleware")
 //importing passport-jwt strategy in the main index.js so that we dont run into errors, this is the first step to do
 const passportJWT = require('./config/passport-jwt-strategy');
 //setting up the chat server to be used with socket.io
-const chatSever = require('http').Server(app) ;// app is our express server app that we had setup after requiring express i.e on line 4
-const chatSockets = require("./config/chat_sockets").chatSockets(chatSever);  // here we included the config chat_sockets.js and in it we had a function chatSockets which accpeted a socketserver , so we sent chatServer which will be our socketServer. Remember chatSockets as a variable is different than chatSockets as a functioiin which is defined in chat_sockets.js
- chatSever.listen(5000);// making our chatServer listen on another port other than our server port(8000)
- console.log('chat server is listening on port 5000');
+const chatServer = require('http').Server(app);// app is our express server app that we had setup after requiring express i.e on line 4
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);  // here we included the config chat_sockets.js and in it we had a function chatSockets which accpeted a socketserver , so we sent chatServer which will be our socketServer. Remember chatSockets as a variable is different than chatSockets as a functioiin which is defined in chat_sockets.js
+chatServer.listen(5000);// making our chatServer listen on another port other than our server port(8000)
+console.log('chat server is listening on port 5000');
 
 app.use(sassMiddleware({
     src: "./assets/scss",

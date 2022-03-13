@@ -47,11 +47,16 @@ let createPost = function(){
             let newPost = newPostDom(data.data.post);
 
             // newPost contains the post that was created now we just need to append it in the post list container(container that contains all the post) inside that also we will be appending it in ul because each post is inside an li and we want to show all so append the post inside an ul
+             /* when createPost function is sucessfull, we will come here
+             Now since post is created successfully , we need to insert it to post-list-container inside ul so that its visible inside li since posts are going to appended inside li
 
+
+             */
             // prepending newPost so that it gets appended to first positon
             $('#posts-list-container>ul').prepend(newPost);
 
           // adding delete link to all dynamically created post so that now posts will be also deleted using ajax
+          // here space is added so that we add the delete button to the newPost that we have inserted in the posts-list-container
           deletePost($(' .delete-post-button'),newPost);
         },
         error: function(error){

@@ -93,14 +93,31 @@ including script that will allow us to submit form data asynchoronously viz home
 
 
 <% /* %>
+ Including socket.io library with help of cdn which we can find on cdn.js or google socket.io library cdn and selecet socket.io.js and not the minified version for now
+
+<% */ %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+<% /* %>
      Including chat_engine.js
     <% */ %>
 
     <script src="/js/chat_engine.js"></script>
 
+
+
     <% /* %>
-     Including socket.io library with help of cdn which we can find on cdn.js or google socket.io library cdn and selecet socket.io.js and not the minified version for now
+      Now we want to run the chat_engine script only if user is signed in otherwise there is no use of running chat_engine
+      since we dont want anonymous people to run our script
 
-    <% */ %>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+      We need to initialize the class inside the { home.ejs } file by passing the id of the
+      chatbox {user-chat-box}.
+   <% */ %>
+  <% if(locals.user) {%>
+   <script>
+     new ChatEngine('user-chat-box','<%= locals.user._id%>');
+   </script>
+    
+    <%}%>
+
