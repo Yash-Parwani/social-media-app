@@ -27,5 +27,18 @@ fired.
            socket.on('disconnect',function(){
               console.log('socket disconnected!');
            });
+
+
+
+           // recieve request to join room
+           socket.on('join_room',function(data){
+            console.log("joining request received",data);
+
+
+            // join the user to the requested room
+            socket.join(data.chatroom);
+              //send the data of the joined user back to the client
+            io.in(data.chatroom).emit('user_joined', data);
+           });
   });
 }

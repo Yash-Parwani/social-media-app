@@ -116,7 +116,7 @@ including script that will allow us to submit form data asynchoronously viz home
    <% */ %>
   <% if(locals.user) {%>
    <script>
-     new ChatEngine('user-chat-box','<%= locals.user._id%>');
+     new ChatEngine('user-chat-box','<%= locals.user.email%>');
    </script>
     
     <%}%>
