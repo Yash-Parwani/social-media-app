@@ -1,0 +1,58 @@
+<% /* %>
+This is the partial where we will coding the front-end side of chatbox
+
+And this partial is to be included in home.ejs since its at homepage where people will chat
+
+
+And the styling i.e the css folder will be included in the homepage itself although we can do it here as well but its better to do it over there
+<% */ %>
+
+<% /* %>
+     Now we want only signed in users to view chatbox , because only signed in users should be allowed to chat
+
+     And we know how to check if a user is signed in, because if user is signed in passport will insert user in locals and hence we will be able to see him
+     i.e locals.user
+     <% */ %>
+<% if(locals.user){%>
+    <div id="user-chat-box">
+        <% /* %>
+         Now as we had discussed chatbox is divided into two parts
+         list
+         form to send message
+        <% */ %>
+    
+        <% /* %>
+        List section
+        giving ul an id since list container is going to be a single container
+        <% */ %>
+        <ul id="chat-messages-list">
+            <% /* %>
+            Giving <li> class since there will be many sent and receieved messages for whom we want common styling
+                Hence its better to give them class attribute instead of id
+           <% */ %>
+            <li class="received-messages">
+                <span>Received Message</span>
+            </li>
+            <li class="sent-messages">
+                <span>Sent Message</span>
+            </li>
+    
+        </ul>
+    
+    
+    
+        
+        <% /* %>
+         Form section
+        <% */ %>
+    
+        <div id="chat-message-input-container">
+            <% /* %>
+            Giving both input and button an id since they will be only one and not many like messages
+            Hence its better to give them id attribute instead of class attribute
+           <% */ %>
+            <input type="text" id="chat-message-input" placeholder="Type your message here">
+            <button id="send-message"type="submit">Send</button>
+        </div>
+    </div>
+    <%}%>

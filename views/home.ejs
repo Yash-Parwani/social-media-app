@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="/css/home.css">
+<% /* %>
+     Linking chatboxes css 
+    <% */ %>
+
+    <link rel="stylesheet" href="/css/chat_box.css">
 
 <div id="home-container">
   <section id="feed-posts">
@@ -69,6 +74,11 @@
         <%}%>
       </ul>
   </section>
+
+  <% /* %>
+     Including the chatbox partial
+    <% */ %>
+    <%- include('_chatbox') -%>
 </div>
 
 <% /* %>
